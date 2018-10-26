@@ -16,3 +16,7 @@ A web app to compare bike products
 + [Maven](https://maven.apache.org/)
 + [jsoup](https://jsoup.org/)
 + [Swagger](https://swagger.io/)
+
+### Platform
++ [Heroku - Application Container](https://www.heroku.com/)
++ [Heroku - Database](https://www.heroku.com/postgres)
