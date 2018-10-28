@@ -11,17 +11,18 @@ import javax.persistence.Id;
 @Entity
 public class Bike {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private  Long id;
-    private String name;
-    private Float price;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String name;
+	private Float price;
 
-    private Bike() {}
+	private Bike() {
+	}
 
-    public Bike(final String name, final Float price) {
-        this.name = name;
-        this.price = price;
-    }
+	public Bike(final String name, final Float price) {
+		this.name = name;
+		this.price = price;
+	}
 
 }

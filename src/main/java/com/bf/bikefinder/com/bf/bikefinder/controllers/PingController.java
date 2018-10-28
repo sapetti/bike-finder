@@ -14,4 +14,11 @@ public class PingController {
         response.put("pong", "Hello World!");
         return response;
     }
+    
+    @GetMapping("admin/ping")
+    public Map<String, String> pingAdmin() {
+        Map<String, String> response = new HashMap<>();
+        response.put("pong", "Hello Admin!");
+        return response;
+    }
 }
