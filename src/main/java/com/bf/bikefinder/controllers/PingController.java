@@ -1,4 +1,4 @@
-package com.bf.bikefinder.com.bf.bikefinder.controllers;
+package com.bf.bikefinder.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

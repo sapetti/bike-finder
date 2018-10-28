@@ -1,4 +1,4 @@
-package com.bf.bikefinder.com.bf.bikefinder.controllers;
+package com.bf.bikefinder.controllers;
 
 import com.bf.bikefinder.model.Maker;
 import com.bf.bikefinder.repositories.MakerRepository;

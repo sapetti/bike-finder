@@ -1,4 +1,4 @@
-package com.bf.bikefinder.com.bf.bikefinder.controllers;
+package com.bf.bikefinder.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

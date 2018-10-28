@@ -1,14 +1,16 @@
 package com.bf.bikefinder.dataloaders;
 
-import com.bf.bikefinder.model.Bike;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.bf.bikefinder.repositories.BikeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.scheduling.annotation.Scheduled;
 
 @Component
-public class BikeDataLoader implements CommandLineRunner {
+public class BikeDataLoader {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(BikeDataLoader.class);
     private final BikeRepository repository;
 
     @Autowired
@@ -16,11 +18,9 @@ public class BikeDataLoader implements CommandLineRunner {
         this.repository = repository;
     }
 
-    @Override
-    public void run(String... strings) throws Exception {
-//        this.repository.save(new Bike("T10", 1000f));
-//        this.repository.save(new Bike("T11", 1000f));
-
-        this.repository.findAll().forEach(System.out::println);
+    @Scheduled(cron="0 0 0 * * *") // Ejecutamos la recoleccion de datos todos los dias a las 00:00
+    public void collectData() {
+        LOGGER.debug("collecting data...");
     }
+
 }

@@ -1,4 +1,4 @@
-package com.bf.bikefinder.com.bf.bikefinder.config;
+package com.bf.bikefinder.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
