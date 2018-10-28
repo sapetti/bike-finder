@@ -1,7 +1,7 @@
 package com.bf.bikefinder.repositories;
 
 import com.bf.bikefinder.model.Rating;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface RatingRepository extends PagingAndSortingRepository<Rating, Long> {
+public interface RatingRepository extends CrudRepository<Rating, Long> {
 }

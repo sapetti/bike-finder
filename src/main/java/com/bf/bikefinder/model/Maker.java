@@ -18,7 +18,7 @@ public class Maker {
     private String name;
     private String country; /* mejor que sea una tabla de countries fijos y esto solo un ID, pero habría que revisarlo bien (idiomas,...)*/
     private String description;
-    private String url_details;
+    private String urlDetails;
 
     private Maker() {
     }

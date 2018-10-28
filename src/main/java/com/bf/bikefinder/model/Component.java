@@ -16,13 +16,13 @@ public class Component {
     private Long id;
     private String name;
     private Float price;
-    private Long type_id;
-    private String maker_id;
+    private Long typeId;
+    private String makerId;
     private String description;
     private Integer year;
-    private String url_details;
+    private String urlDetails;
     private Float weight;
-    private String url_image;
+    private String urlImage;
 
 
     private Component() {

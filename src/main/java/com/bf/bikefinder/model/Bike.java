@@ -19,11 +19,11 @@ public class Bike {
     private String size; /* Revisar si este campo se pilla de base de datos (preferido) o es una enum de constantes */
     private String description;
     private Integer year;
-    private String url_details;
-    private Long maker_id;
-    private Long category_id;
+    private String urlDetails;
+    private Long makerId;
+    private Long categoryId;
     private Float weight;
-    private String url_image;
+    private String urlImage;
 
 
     private Bike() {}
