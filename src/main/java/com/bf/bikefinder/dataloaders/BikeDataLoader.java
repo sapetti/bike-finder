@@ -21,8 +21,8 @@ import com.bf.bikefinder.model.Maker;
 import com.bf.bikefinder.repositories.BikeRepository;
 import com.bf.bikefinder.repositories.MakerRepository;
 @Component
-//public class BikeDataLoader {
-	public class BikeDataLoader implements CommandLineRunner {
+public class BikeDataLoader {
+	//public class BikeDataLoader implements CommandLineRunner {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BikeDataLoader.class);
    
@@ -39,15 +39,16 @@ import com.bf.bikefinder.repositories.MakerRepository;
     @Scheduled(cron="0 0 0 * * *") // Ejecutamos la recoleccion de datos todos los dias a las 00:00
     public void collectData() {
         LOGGER.debug("collecting data...");
+        loadBikesBH() ;
     }
     
-    @Override
-    public void run(String... strings) throws Exception {
-//        this.repository.save(new Bike("T10", 1000f));
-//        this.repository.save(new Bike("T11", 1000f));
-
-    	loadBikesBH() ;
-    }
+//    @Override
+//    public void run(String... strings) throws Exception {
+////        this.repository.save(new Bike("T10", 1000f));
+////        this.repository.save(new Bike("T11", 1000f));
+//
+//    	loadBikesBH() ;
+//    }
     
     private void loadBikesBH() {
 		String url_en = "https://www.bhbikes.com/en_GB/bikes/";
