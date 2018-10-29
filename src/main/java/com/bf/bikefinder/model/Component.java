@@ -2,10 +2,7 @@ package com.bf.bikefinder.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -17,13 +14,13 @@ public class Component {
     private String name;
     private Float price;
     private Long typeId;
-    private String makerId;
+    @ManyToOne
+    private Maker maker;
     private String description;
     private Integer year;
     private String urlDetails;
     private Float weight;
     private String urlImage;
-
 
     private Component() {
     }

@@ -73,7 +73,7 @@ public class BikeDataLoader {
 						maker=new Maker("BH");
 						makerRepository.save(maker);
 					}
-					bike.setMakerId(maker.getId());
+					bike.setMaker(maker);
 					bike.setCategory(div.attr("data-seccion_web"));
 					//				    bike.setModel(model);
 					String priceStr=div.attr("data-precio").replace(".", ",");

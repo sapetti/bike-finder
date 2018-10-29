@@ -2,10 +2,8 @@ package com.bf.bikefinder.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -20,11 +18,16 @@ public class Bike {
     private String description;
     private Integer year;
     private String urlDetails;
-    private Long makerId;
+    @ManyToOne
+    private Maker maker;
     private Long categoryId;
     private String category;
     private Float weight;
     private String urlImage;
+
+
+    @ManyToMany
+    private List<Component> componentList;
 
 
     private Bike() {}
@@ -90,12 +93,12 @@ public class Bike {
 		this.urlDetails = urlDetails;
 	}
 
-	public Long getMakerId() {
-		return makerId;
-	}
+    public Maker getMaker() {
+        return maker;
+    }
 
-	public void setMakerId(Long makerId) {
-		this.makerId = makerId;
+    public void setMaker(Maker maker) {
+        this.maker = maker;
 	}
 
 	public Long getCategoryId() {
@@ -129,5 +132,13 @@ public class Bike {
 	public void setUrlImage(String urlImage) {
 		this.urlImage = urlImage;
 	}
+
+    public List<Component> getComponentList() {
+        return componentList;
+    }
+
+    public void setComponentList(List<Component> componentList) {
+        this.componentList = componentList;
+    }
 
 }
