@@ -27,7 +27,7 @@ public class Bike {
 
 
     @ManyToMany
-    private List<Component> componentList;
+    private List<BikeComponent> componentList;
 
 
     private Bike() {}
@@ -133,11 +133,11 @@ public class Bike {
 		this.urlImage = urlImage;
 	}
 
-    public List<Component> getComponentList() {
+    public List<BikeComponent> getComponentList() {
         return componentList;
     }
 
-    public void setComponentList(List<Component> componentList) {
+    public void setComponentList(List<BikeComponent> componentList) {
         this.componentList = componentList;
     }
 
