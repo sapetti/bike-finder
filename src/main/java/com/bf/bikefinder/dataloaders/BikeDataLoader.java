@@ -137,8 +137,19 @@ import com.bf.bikefinder.repositories.MakerRepository;
 		}
 	}
 
-	private static Consumer<Tuple2<Bike, Element>> setAttrInEntity(BiConsumer<Bike, String> setBikeValue, String selector) {
-    	return tuple -> setBikeValue.accept(tuple._1, tuple._2.attr(selector));
+	@SuppressWarnings("unchecked")
+	private static <T> Consumer<Tuple2<Bike, Element>> setChildAttr(BiConsumer<Bike, T> setBikeValue, String childSelector, String attrSelector) {
+		return tuple -> setBikeValue.accept(tuple._1, (T) tuple._2.select(childSelector).attr(attrSelector));
+	}
+
+	@SuppressWarnings("unchecked")
+	private static <T> Consumer<Tuple2<Bike, Element>> setAttr(BiConsumer<Bike, T> setBikeValue, String attrSelector) {
+    	return tuple -> setBikeValue.accept(tuple._1, (T) tuple._2.attr(attrSelector));
+	}
+
+	@SuppressWarnings("unchecked")
+	private static <T> Consumer<Tuple2<Bike, Element>> setValue(BiConsumer<Bike, T> setBikeValue, T value) {
+		return tuple -> setBikeValue.accept(tuple._1, value);
 	}
 
 	private static Double parseDouble(String num) throws ParseException {
@@ -165,21 +176,23 @@ import com.bf.bikefinder.repositories.MakerRepository;
 					.orElseGet(() -> new Bike(model));
 			return Tuple.of(bike, div);
 		})
-		.peek(setAttrInEntity(Bike::setCategory, "data-seccion_web"))
-		.peek(tuple -> tuple._1.setMakerId(maker.getId()))
-		.peek(tuple -> tuple._1.setUrlDetails(tuple._2.select("a.image_container").first().attr("abs:href")))
+		.peek(setAttr(Bike::setCategory, "data-seccion_web"))
+		.peek(setValue(Bike::setMaker, maker))
+		.peek(setChildAttr(Bike::setUrlDetails, "a.image_container", "abs:href"))
 		.peek(tuple -> {
 			String priceStr = tuple._2.attr("data-precio").replace(".", ",");
 			Try.of(() -> parseDouble(priceStr))
 					.onSuccess(tuple._1::setPrice);
 		})
-		.peek(tuple -> {
-			Element link = tuple._2.select("a.image_container").first();
-			tuple._1.setUrlDetails(link.attr("abs:href"));
-			Optional.of(link.select("img").first())
-				.ifPresent(element -> tuple._1.setUrlImage(element.attr("src")));
-		})
-		.peek(tuple -> tuple._1.setYear(2018))
+//		.peek(tuple -> {
+//			//div.image > a > img
+//			Element link = tuple._2.select("a.image_container").first();
+//
+//			Optional.of(link.select("img").first())
+//				.ifPresent(element -> tuple._1.setUrlImage(element.attr("src")));
+//		})
+		.peek(setChildAttr(Bike::setUrlImage, "a.image_container", "src"))
+		.peek(setValue(Bike::setYear, 2018))
 		.forEach(tuple -> bikeRepository.save(tuple._1));
 	}
 
