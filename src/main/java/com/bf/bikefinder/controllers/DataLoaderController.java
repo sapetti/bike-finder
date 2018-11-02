@@ -21,7 +21,7 @@ public class DataLoaderController {
     public String loadData(@RequestParam(value = "java8", defaultValue = "false") Boolean isJava8) {
         LOGGER.debug("loadData");
         dataLoader.collectData();
-        return "done!";
+        return "{\"message\": \"done!\"}";
     }
 
     @GetMapping(value = "java8", produces = MediaType.APPLICATION_JSON_VALUE)
