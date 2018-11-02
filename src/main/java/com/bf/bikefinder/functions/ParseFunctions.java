@@ -41,6 +41,6 @@ public class ParseFunctions {
         }
     };
 
-    public static Function<String, String> replaceDots = text-> text.replace(".", ",");
+    public static Function<String, String> replaceDots = text -> text.replace(".", ",");
 
 }

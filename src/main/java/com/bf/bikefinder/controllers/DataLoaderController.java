@@ -13,16 +13,16 @@ public class DataLoaderController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DataLoaderController.class);
 
-	@Autowired
-	private BikeDataLoaderImpl dataLoader;
+    @Autowired
+    private BikeDataLoaderImpl dataLoader;
 
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-	public String loadData(@RequestParam(value = "java8", defaultValue = "false") Boolean isJava8) {
+    public String loadData(@RequestParam(value = "java8", defaultValue = "false") Boolean isJava8) {
         LOGGER.debug("loadData");
         dataLoader.collectData();
         return "done!";
-	}
+    }
 
     @GetMapping(value = "java8", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
