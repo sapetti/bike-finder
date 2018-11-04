@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+bike-finder-ui/build/
+bike-finder-ui/node_modules/
+bike-finder.iml
+src/main/resources/static
+target/
