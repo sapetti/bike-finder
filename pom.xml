@@ -134,9 +134,17 @@
             </build>
         </profile>
 
+        <!-- Avoid transpiling UI -->
+        <profile>
+            <id>backend</id>
+        </profile>
+
         <!-- Transpiles React app -->
         <profile>
             <id>ui</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
