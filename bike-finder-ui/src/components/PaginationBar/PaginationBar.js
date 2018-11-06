@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, ButtonGroup, ButtonToolbar, Col } from 'react-bootstrap'
+import { Button, ButtonGroup, ButtonToolbar, Col, Badge } from 'react-bootstrap'
 
 const DOTS = '...'
 
@@ -10,9 +10,9 @@ export default class PaginationBar extends Component {
       .fill(1)
       .map((x, y) => x + y)
     if (totalPages > 7) {
-      if (number < 6) {
+      if (number < 4) {
         numbers = numbers.slice(0, 5).concat(DOTS, totalPages)
-      } else if (number > totalPages - 6) {
+      } else if (number > totalPages - 5) {
         numbers = [1].concat(DOTS, numbers.slice(totalPages - 5, totalPages))
       } else {
         numbers = [1].concat(
@@ -28,15 +28,27 @@ export default class PaginationBar extends Component {
       <Col>
         <ButtonToolbar>
           <ButtonGroup>
-            {numbers.map((num, index) => (
-              <Button
-                key={index}
-                bsStyle="link"
-                onClick={this.props.onClick.bind(null, { number: index })}
-              >
-                {num}
-              </Button>
-            ))}
+            {numbers.map(
+              (num, index) =>
+                DOTS == num ? (
+                  <Button
+                    key={num + index}
+                    bsStyle="link"
+                    style={{ cursor: 'default' }}
+                    disabled
+                  >
+                    {num}
+                  </Button>
+                ) : (
+                  <Button
+                    key={num + index}
+                    bsStyle="link"
+                    onClick={this.props.onClick.bind(null, { number: num - 1 })}
+                  >
+                    {num - 1 == number ? <Badge>{num}</Badge> : num}
+                  </Button>
+                )
+            )}
           </ButtonGroup>
         </ButtonToolbar>
       </Col>

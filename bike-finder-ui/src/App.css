@@ -42,3 +42,11 @@
 th {
   text-align: center;
 }
+
+/* Remove focus selection */
+.btn:focus {
+  outline: none;
+}
+.btn:hover {
+  outline: 0 !important;
+}

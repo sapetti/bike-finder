@@ -7,12 +7,13 @@ export default class BikeList extends Component {
   state = {
     bikes: [],
     pagination: {},
-    loading: true
+    loading: true,
+    error: undefined
   }
 
   fetchBikes = ({ size = 10, number = 0 }) => {
     console.log(`/bike?page=${number}&size=${size}`)
-    this.setState({ loading: true })
+    this.setState({ loading: true, error: undefined })
     fetch(`/bike?page=${number}&size=${size}`)
       .then(response => response.json())
       .then(
@@ -31,7 +32,14 @@ export default class BikeList extends Component {
           })
         }
       )
-      .catch(error => console.error(error))
+      .catch(error => {
+        console.error(error)
+        this.setState({
+          bikes: [],
+          loading: false,
+          error: 'Somenthing wrong happened'
+        })
+      })
   }
 
   componentDidMount() {
@@ -39,7 +47,8 @@ export default class BikeList extends Component {
   }
 
   render() {
-    const { bikes, pagination, loading } = this.state
+    const { bikes = [], pagination, loading, error } = this.state
+    console.log('error', error)
     return (
       <Panel>
         <Panel.Heading>
@@ -57,7 +66,7 @@ export default class BikeList extends Component {
               </tr>
             </thead>
             <tbody>
-              {loading == false ? (
+              {loading === false ? (
                 bikes.map(({ id, name, maker, category, year, price }) => (
                   <tr key={id}>
                     <td>{maker.name}</td>
