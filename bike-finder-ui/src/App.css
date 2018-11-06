@@ -4,7 +4,8 @@
 
 .spin {
   margin-top: 1.4rem;
-  font-size: 5rem;
+  margin-bottom: 1.4rem;
+  font-size: 3rem;
   -webkit-animation: spin 1.9s infinite linear;
   -moz-animation: spin 1.9s infinite linear;
   -o-animation: spin 1.9s infinite linear;

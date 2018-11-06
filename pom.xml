@@ -205,6 +205,19 @@
                                         <resource>
                                             <directory>bike-finder-ui/build</directory>
                                             <filtering>true</filtering>
+                                            <excludes>
+                                                <exclude>**/*.woff*</exclude>
+                                                <exclude>**/*.ttf</exclude>
+                                            </excludes>
+                                        </resource>
+                                        <!-- "Maven Filter Plugin corrupted binary font files": https://stackoverflow.com/questions/32475982/fontawesome-fails-to-load-fonts-locally-and-in-electron-app -->
+                                        <resource>
+                                            <directory>bike-finder-ui/build</directory>
+                                            <filtering>false</filtering>
+                                            <includes>
+                                                <include>**/*.woff*</include>
+                                                <include>**/*.ttf</include>
+                                            </includes>
                                         </resource>
                                     </resources>
                                 </configuration>
