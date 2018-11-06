@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
 import { Table, Panel, Glyphicon } from 'react-bootstrap'
 
-// import PaginationBar from '../pagination/PaginationBar'
+import PaginationBar from '../PaginationBar/PaginationBar'
 
 export default class BikeList extends Component {
   state = {
-    bikes: []
+    bikes: [],
+    pagination: {},
+    loading: true
   }
-  componentDidMount() {
-    fetch('/bike')
+
+  fetchBikes = ({ size = 10, number = 0 }) => {
+    console.log(`/bike?page=${number}&size=${size}`)
+    this.setState({ loading: true })
+    fetch(`/bike?page=${number}&size=${size}`)
       .then(response => response.json())
       .then(
         ({ content, totalPages, totalElements, size, number, first, last }) => {
@@ -21,15 +26,20 @@ export default class BikeList extends Component {
               number,
               first,
               last
-            }
+            },
+            loading: false
           })
         }
       )
       .catch(error => console.error(error))
   }
 
+  componentDidMount() {
+    this.fetchBikes(this.state.pagination)
+  }
+
   render() {
-    const { bikes, pagination } = this.state
+    const { bikes, pagination, loading } = this.state
     return (
       <Panel>
         <Panel.Heading>
@@ -47,7 +57,7 @@ export default class BikeList extends Component {
               </tr>
             </thead>
             <tbody>
-              {bikes.length ? (
+              {loading == false ? (
                 bikes.map(({ id, name, maker, category, year, price }) => (
                   <tr key={id}>
                     <td>{maker.name}</td>
@@ -70,7 +80,9 @@ export default class BikeList extends Component {
             </tbody>
           </Table>
         </Panel.Body>
-        <Panel.Footer>{/* <PaginationBar {...pagination} /> */}</Panel.Footer>
+        <Panel.Footer>
+          <PaginationBar {...pagination} onClick={this.fetchBikes} />
+        </Panel.Footer>
       </Panel>
     )
   }
