@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Table, Panel, Glyphicon } from 'react-bootstrap'
+import { Table, Panel } from 'react-bootstrap'
 
 import PaginationBar from '../PaginationBar/PaginationBar'
+import { Loading } from '../common'
 
 export default class BikeList extends Component {
   state = {
@@ -48,7 +49,6 @@ export default class BikeList extends Component {
 
   render() {
     const { bikes = [], pagination, loading, error } = this.state
-    console.log('error', error)
     return (
       <Panel>
         <Panel.Heading>
@@ -66,7 +66,7 @@ export default class BikeList extends Component {
               </tr>
             </thead>
             <tbody>
-              {loading === false ? (
+              {!loading ? (
                 bikes.map(({ id, name, maker, category, year, price }) => (
                   <tr key={id}>
                     <td>{maker.name}</td>
@@ -79,10 +79,7 @@ export default class BikeList extends Component {
               ) : (
                 <tr>
                   <td colSpan="5">
-                    <Glyphicon
-                      glyph="glyphicon glyphicon-refresh"
-                      className="spin"
-                    />
+                    <Loading />
                   </td>
                 </tr>
               )}
@@ -90,7 +87,11 @@ export default class BikeList extends Component {
           </Table>
         </Panel.Body>
         <Panel.Footer>
-          <PaginationBar {...pagination} onClick={this.fetchBikes} />
+          {!loading || bikes.length ? (
+            <PaginationBar {...pagination} onClick={this.fetchBikes} />
+          ) : (
+            <div />
+          )}
         </Panel.Footer>
       </Panel>
     )
